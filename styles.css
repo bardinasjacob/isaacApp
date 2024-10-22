@@ -1,6 +1,6 @@
 :root{
-    --primary-color: #53131E;
-    --secondary-color: #B5D6B2;
+    --primary-color: #C5EFCB;
+    --secondary-color: #020402;
 }
 
 body{
@@ -16,7 +16,17 @@ body{
 header{
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
     color: var(--secondary-color);
+}
+
+header h1{
+    text-align: center;
+}
+
+nav{
+    
 }
 
 main{
