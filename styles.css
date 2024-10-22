@@ -1,0 +1,24 @@
+:root{
+    --primary-color: #53131E;
+    --secondary-color: #B5D6B2;
+}
+
+body{
+    background: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: auto;
+    justify-content: center;
+}
+
+header{
+    display: flex;
+    justify-content: center;
+    color: var(--secondary-color);
+}
+
+main{
+    
+}
