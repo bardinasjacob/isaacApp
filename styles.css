@@ -25,10 +25,23 @@ header h1{
     text-align: center;
 }
 
-nav{
-    
+main{
+    display: flex;
+    justify-content: center;
 }
 
-main{
-    
+form{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 70%;
+}
+
+form input{
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+form button{
+    margin-top: 4px;
 }
