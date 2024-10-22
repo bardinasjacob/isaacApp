@@ -24,12 +24,13 @@ nav ul{
 
 nav li{
     list-style: none;
-    padding: 10px;
-    margin-right: 5px;
-    background-color: var(--secondary-color)
+    margin-top: 5px;
 }
 
 nav li a{
+    padding: 10px;
+    margin-right: 5px;
+    background-color: var(--secondary-color);
     color: var(--primary-color);
     text-decoration: none;
 }
@@ -60,7 +61,7 @@ form{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    width: 70%;
+    width: 50%;
     font-family: "Roboto", sans-serif;
 }
 
@@ -71,4 +72,14 @@ form input{
 
 form button{
     margin-top: 4px;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    width: 20%;
+    margin: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+form button:hover{
+    color: var(--tertiary-color);
 }

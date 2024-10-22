@@ -16,7 +16,7 @@
                     <li><a href="submit.html">Submit</a></li>
                 </ul>
             </nav>
-            <h1>Submit Item Data</h1>
+            <h1 id="heroText">Submit Item Data</h1>
         </header>
         <main>
             <form id="itemEntry">
@@ -44,6 +44,11 @@
         <footer>
 
         </footer>
-        <script src="" async defer></script>
+        <script async defer>
+            document.getElementById("itemEntry").addEventListener("submit", function(e) {
+                e.preventDefault();
+    
+            })
+        </script>
     </body>
 </html>
