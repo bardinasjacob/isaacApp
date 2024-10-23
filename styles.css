@@ -45,11 +45,8 @@ header{
     flex-direction: column;
     flex-wrap: wrap;
     color: var(--secondary-color);
-}
-
-header h1{
-    text-align: center;
     font-family: "Roboto", sans-serif;
+    text-align: center;
 }
 
 main{
