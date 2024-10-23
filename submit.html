@@ -39,15 +39,22 @@
                 <input type="text" id="netShotSpeed" value="0">
                 <label>Net Deal % Change</label>
                 <input type="text" id="netDealRate" value="0">
-                <button type="submit">Submit</button>
+                <button type="submit" id="submitButton" >Submit</button>
             </form>
         </main>
         <footer>
 
         </footer>
         <script async defer>
+
+            let primaryColor = "#C5EFCB"
+            let tertiaryColor = "#B42034";
+
             document.getElementById("itemEntry").addEventListener("submit", function(e) {
                 e.preventDefault();
+
+                document.getElementById("submitButton").setAttribute("disabled", "disabled");
+                document.getElementById("submitButton").style.color = tertiaryColor
                 
                 var name = $('#itemName').val();
                 var hp = $('#netHP').val();
@@ -76,13 +83,18 @@
                     type: "POST",
                     data: formData,
                     success: function(response){
-                        console.log(response)
-                        console.log
+                        alert(response);
+                        document.getElementById("submitButton").removeAttribute("disabled");
+                        document.getElementById("submitButton").style.color = primaryColor
                     },
                     error: function(xhr, error, status){
+                        alert("Error");
                         console.error(error + " " + status)
+                        document.getElementById("submitButton").removeAttribute("disabled");
+                        document.getElementById("submitButton").style.color = primaryColor
                     }
                 });
+                
             });
         </script>
     </body>
