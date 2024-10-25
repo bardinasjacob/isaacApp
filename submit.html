@@ -29,6 +29,8 @@
                 <input type="text" id="netSpeed" value="0">
                 <label>Net Tear Rate</label>
                 <input type="text" id="netTearsRate" value="0">
+                <label>Net Tear Mult</label>
+                <input type="text" id="netTearsMult" value="0">
                 <label>Net Damage</label>
                 <input type="text" id="netDamage" value="0">
                 <label>Net Damage Multiplier</label>
@@ -60,6 +62,7 @@
                 var hp = $('#netHP').val();
                 var speed = $('#netSpeed').val();
                 var tears = $('#netTearsRate').val();
+                var tears_mult = $('#netTearsMult').val();
                 var dmg = $('#netDamage').val();
                 var dmg_mult = $('#netDamageMult').val();
                 var shot_speed = $('#netShotSpeed').val();
@@ -70,6 +73,7 @@
                     hp: hp,
                     speed: speed,
                     tears: tears,
+                    tears_mult: tears_mult,
                     dmg: dmg,
                     dmg_mult: dmg_mult,
                     shot_speed: shot_speed,
