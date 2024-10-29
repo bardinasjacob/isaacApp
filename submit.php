@@ -44,4 +44,5 @@
     else{
         echo "Invalid request";
     }
+    mysqli_close($conn);
 ?>

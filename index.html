@@ -7,6 +7,7 @@
         <meta name="description" content="Database Project">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="styles.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body>
         <header>
@@ -22,7 +23,10 @@
         <main>
             <div class="hero">
                 <div id="characterPanel">
-
+                    <picture id="charPicture"></picture>
+                    <div id="charSelect">
+                        <button onclick="charDropdownFunction()">hahahaha</button>
+                    </div>
                 </div>
                 <div id="itemPanel">
                     
@@ -32,6 +36,20 @@
         <footer>
 
         </footer>
-        <script></script>
+        <script>
+            function charDropdownFunction(){
+                $.ajax({
+                    url: 'index.php',
+                    type: "GET",
+                    success: function(response){
+                        console.log(response);
+                    },
+                    error: function(xhr, error, status){
+                        alert("Error");
+                        console.error(error + " " + status)
+                    }
+                });
+            }
+        </script>
     </body>
 </html>

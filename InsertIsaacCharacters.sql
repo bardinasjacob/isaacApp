@@ -1,8 +1,10 @@
 USE isaac;
 
 INSERT INTO character_table (char_name, char_red_hp, char_soul_hp, char_speed, char_tears, char_dmg, char_dmg_mult, char_range, char_shot_speed) 
-VALUES ("Isaac", 3, 1, 1, 3, 1, 10, 5),
-("Maggie", 4, 0.6, 1, 3, 1, 10, 5),
+VALUES ("Isaac", 3, 3, 1, 1, 3, 1, 10, 5),
+("Pisaac", 3, 3, 1, 1, 3, 1, 10, 5)
+
+/* ("Maggie", 4, 0.6, 1, 3, 1, 10, 5),
 ("Cain", 2, 1, 1, 4, 1, 10, 5),
 ("Judas", 1, 1, 1, 7, 1, 10, 5),
 ("Samson", 2, 1, 1, 4, 1, 10, 5),
@@ -28,4 +30,4 @@ VALUES ("Isaac", 3, 1, 1, 3, 1, 10, 5),
 ("T_Forgotton", 1, 0.8, 1, 4, 1, 10, 5),
 ("T_Keeper", 1, 0.8, 1, 4, 1, 10, 5),
 ("T_Blue_Baby", 1, 0.8, 1, 4, 1, 10, 5),
-("T_Jacob_and_Esau", 1, 0.8, 1, 4, 1, 10, 5),
+("T_Jacob_and_Esau", 1, 0.8, 1, 4, 1, 10, 5), */
