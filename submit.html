@@ -23,8 +23,10 @@
             <form id="itemEntry">
                 <label>Item Name</label>
                 <input type="text" id="itemName" placeholder="Enter the item name">
-                <label>Net HP</label>
-                <input type="text" id="netHP" value="0">
+                <label>Net Red HP</label>
+                <input type="text" id="netRedHP" value="0">
+                <label>Net Soul HP</label>
+                <input type="text" id="netSoulHP" value="0">
                 <label>Net Speed</label>
                 <input type="text" id="netSpeed" value="0">
                 <label>Net Tear Rate</label>
@@ -59,7 +61,8 @@
                 document.getElementById("submitButton").style.color = tertiaryColor
                 
                 var name = $('#itemName').val();
-                var hp = $('#netHP').val();
+                var redHp = $('#netRedHP').val();
+                var soulHp = $('#netSoulHP').val();
                 var speed = $('#netSpeed').val();
                 var tears = $('#netTearsRate').val();
                 var tears_mult = $('#netTearsMult').val();
@@ -70,7 +73,8 @@
 
                 var formData = {
                     name: name,
-                    hp: hp,
+                    redHp: redHp,
+                    soulHp: soulHp,
                     speed: speed,
                     tears: tears,
                     tears_mult: tears_mult,
