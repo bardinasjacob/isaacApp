@@ -33,7 +33,9 @@
                     </div>
                 </div>
                 <div id="itemPanel">
-                    
+                    <div id="itemBox">
+
+                    </div>
                 </div>
             </div>
         </main>
@@ -41,6 +43,10 @@
 
         </footer>
         <script>
+            let totalStats = []
+            let itemList = []
+
+            //Populate char selection dropdown with data from items table
             function charDropdownFunction() {
                 $.ajax({
                     url: 'charTable.php',
@@ -59,10 +65,33 @@
                 });
             }
 
+            function placeholderNameForItemSelectionQuery() {
+                $.ajax({
+                    url: 'charTable.php',
+                    type: "GET",
+                    data: {
+                        param: itemList
+                    },
+                    dataType: "json",
+                    success: function(response){
+                        console.log(response.data);
+                    },
+                    error: function(xhr, error, status){
+                        alert("Error");
+                        console.error(error + " " + status)
+                    }
+                });
+            }
+
+            //Populate item selection div with data from items table
             function itemSelectionButtons(){
                 $.ajax({
                     url: 'itemTable.php',
                     type: "GET",
+                    data: {
+                        param: itemList
+                    },
+                    dataType: "json",
                     success: function(response){
                         console.log(response);
                     },
