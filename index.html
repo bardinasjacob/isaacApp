@@ -34,9 +34,10 @@
                 </div>
                 <div id="itemPanel">
                     <div id="itemBox">
-
+                        
                     </div>
                 </div>
+                <button onclick="">Calculate</button>
             </div>
         </main>
         <footer>
@@ -65,6 +66,8 @@
                 });
             }
 
+            //placeholder name, the method that's going to be called on final user request
+            //will send list of selected items, query for the stats for each of them and then add the total to the character stats 
             function placeholderNameForItemSelectionQuery() {
                 $.ajax({
                     url: 'charTable.php',
@@ -88,18 +91,28 @@
                 $.ajax({
                     url: 'itemTable.php',
                     type: "GET",
-                    data: {
-                        param: itemList
-                    },
-                    dataType: "json",
                     success: function(response){
-                        console.log(response);
+                        console.log(response.data);
+                        for(let x = 0; x < response.data.length; x++){
+                            document.getElementById("itemBox").innerHTML += 
+                                `<button id=${response.data[x]} onclick="selectButton(${response.data[x]})">${response.data[x]}</button>`   
+                        }
                     },
                     error: function(xhr, error, status){
                         alert("Error");
                         console.error(error + " " + status)
                     }
                 });
+            }
+
+            function selectButton(itemName){
+                if(document.getElementById(itemName.id).className != 'active'){
+                    document.getElementById(itemName.id).className += 'active'
+                }
+                else{
+                    document.getElementById(itemName.id).className = ''
+                }
+                console.log(itemName.id)
             }
 
             itemSelectionButtons();

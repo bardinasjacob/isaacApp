@@ -39,7 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     echo mysqli_query($conn, $ins_query) ? "Record created successfully" : "Something went wrong creating the record";
 
 } else if ($_SERVER['REQUEST_METHOD'] === "GET") {
-
+    
+    //If get method has parameters search for specific item information, otherwise just return all item names
     $param = $_GET['param'] ?? null;
     if ($param) {
         $response = [
