@@ -25,7 +25,11 @@
                 <div id="characterPanel">
                     <picture id="charPicture"></picture>
                     <div id="charSelect">
-                        <button onclick="charDropdownFunction()">hahahaha</button>
+                        <form id="charSelectForm">
+                            <select name="character" id="character">
+                                <option value="Isaac">Isaac</option>
+                            </select>
+                        </form>
                     </div>
                 </div>
                 <div id="itemPanel">
@@ -37,12 +41,16 @@
 
         </footer>
         <script>
-            function charDropdownFunction(){
+            function charDropdownFunction() {
                 $.ajax({
                     url: 'index.php',
                     type: "GET",
                     success: function(response){
-                        console.log(response);
+                        console.log(response.data);
+                        for(let x = 1; x < response.data.length; x++){
+                            document.getElementById("character").innerHTML += 
+                                `<option value = ${response.data[x]}>${response.data[x]}</option>`   
+                        }
                     },
                     error: function(xhr, error, status){
                         alert("Error");
@@ -50,6 +58,9 @@
                     }
                 });
             }
+
+            charDropdownFunction();
+
         </script>
     </body>
 </html>
