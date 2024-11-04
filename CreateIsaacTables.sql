@@ -28,5 +28,8 @@ CREATE table item_table(
     item_dmg FLOAT,
     item_dmg_mult FLOAT,
     item_range FLOAT,
-    item_shot_speed FLOAT
+    item_shot_speed FLOAT,
+    item_deal_rate FLOAT
     );
+
+    SELECT * FROM item_table;
