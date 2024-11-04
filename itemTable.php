@@ -39,7 +39,26 @@
 
     }
     else if($_SERVER['REQUEST_METHOD'] === "GET"){
+        $item_query = "SELECT item_name FROM item_table;";
+        $result = mysqli_query($conn, $item_query);
+        
+        if($result){
+            $items = [];
+            while($row = mysqli_fetch_assoc($result)){
+                $items[] = $row['item_name'];
 
+            };
+            $response = [
+                'status' => 'success',
+                'data' => $items
+            ];
+        }
+        else{
+            $response = [
+                'status' => 'error',
+                'data' => 'Error querying db'
+            ];
+        }
     }
     else{
         echo "Invalid request";

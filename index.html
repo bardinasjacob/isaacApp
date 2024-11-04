@@ -43,7 +43,7 @@
         <script>
             function charDropdownFunction() {
                 $.ajax({
-                    url: 'index.php',
+                    url: 'charTable.php',
                     type: "GET",
                     success: function(response){
                         console.log(response.data);
@@ -59,6 +59,21 @@
                 });
             }
 
+            function itemSelectionButtons(){
+                $.ajax({
+                    url: 'itemTable.php',
+                    type: "GET",
+                    success: function(response){
+                        console.log(response.data);
+                    },
+                    error: function(xhr, error, status){
+                        alert("Error");
+                        console.error(error + " " + status)
+                    }
+                });
+            }
+
+            itemSelectionButtons();
             charDropdownFunction();
 
         </script>
