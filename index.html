@@ -95,7 +95,7 @@
                         console.log(response.data);
                         for(let x = 0; x < response.data.length; x++){
                             document.getElementById("itemBox").innerHTML += 
-                                `<button id=${response.data[x]} onclick="selectButton(${response.data[x]})">${response.data[x]}</button>`   
+                                `<button class="itemButton" id=${response.data[x]} onclick="selectButton(${response.data[x]})">${response.data[x]}</button>`   
                         }
                     },
                     error: function(xhr, error, status){
@@ -106,11 +106,11 @@
             }
 
             function selectButton(itemName){
-                if(document.getElementById(itemName.id).className != 'active'){
-                    document.getElementById(itemName.id).className += 'active'
+                if(document.getElementById(itemName.id).className != 'itemButton active'){
+                    document.getElementById(itemName.id).className = 'itemButton active';
                 }
                 else{
-                    document.getElementById(itemName.id).className = ''
+                    document.getElementById(itemName.id).className = 'itemButton';
                 }
                 console.log(itemName.id)
             }

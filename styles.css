@@ -81,3 +81,15 @@ form button:hover{
     color: var(--tertiary-color);
 }
 
+.itemBox{
+    display: flex;
+}
+
+.itemButton{
+    padding: 10px;
+}
+
+.itemButton.active{
+    padding: 20px;
+}
+
