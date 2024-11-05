@@ -73,27 +73,25 @@
                 var deal_rate = $('#netDealRate').val();
 
                 var formData = {
-                    name: name,
-                    redHp: redHp,
-                    soulHp: soulHp,
-                    speed: speed,
-                    tears: tears,
-                    tears_mult: tears_mult,
-                    dmg: dmg,
-                    dmg_mult: dmg_mult,
-                    range: range,
-                    shot_speed: shot_speed,
-                    deal_rate: deal_rate
+                    "name": name,
+                    "red_hp": redHp,
+                    "soul_hp": soulHp,
+                    "speed": speed,
+                    "tears": tears,
+                    "tears_mult": tears_mult,
+                    "dmg": dmg,
+                    "dmg_mult": dmg_mult,
+                    "range": range,
+                    "shot_speed": shot_speed,
+                    "deal_rate": deal_rate
                 }
-
-                console.log(formData)
 
                 $.ajax({
                     url: 'itemTable.php',
                     type: "POST",
                     data: formData,
                     success: function(response){
-                        alert(response);
+                        alert(response.message);
                         document.getElementById("submitButton").removeAttribute("disabled");
                         document.getElementById("submitButton").style.color = primaryColor
                     },

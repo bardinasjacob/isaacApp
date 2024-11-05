@@ -33,3 +33,7 @@ CREATE table item_table(
     );
 
     SELECT * FROM item_table;
+
+    INSERT INTO item_table(
+                    item_name, item_red_hp, item_soul_hp, item_speed, item_tears, item_tears_mult, item_dmg, item_dmg_mult, item_range, item_shot_speed, item_deal_rate)
+                    VALUES ('{$name}', 1, 1, 1, 1, 1, 1, 1, 1, 1, {$deal_rate});
