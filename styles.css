@@ -51,7 +51,29 @@ header{
 
 main{
     display: flex;
+    flex-direction: column;
     justify-content: center;
+}
+
+.hero{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#characterPanel{
+    display: flex;
+    flex-direction: row;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+#itemPanel{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 form{
@@ -91,7 +113,7 @@ form button:hover{
     background-color: var(--secondary-color);
     color: var(--primary-color);
     width: 20%;
-    margin: auto;
+    margin: 1px;
     border-color: var(--secondary-color);
 }
 
