@@ -51,7 +51,6 @@ header{
 
 main{
     display: flex;
-    flex-direction: column;
     justify-content: center;
 }
 
@@ -64,14 +63,6 @@ main{
 #characterPanel{
     display: flex;
     flex-direction: row;
-    margin-left: 10%;
-    margin-right: 10%;
-}
-
-#itemPanel{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
     margin-left: 10%;
     margin-right: 10%;
 }
@@ -103,8 +94,26 @@ form button:hover{
     color: var(--tertiary-color);
 }
 
-.itemBox{
+
+#itemPanel{
     display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-left: 10%;
+    margin-right: 10%;
+    border: 3px #020402;
+    border-style: solid;
+    padding: 3px;
+}
+
+
+#itemBox{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    
 }
 
 .itemButton{
@@ -112,7 +121,7 @@ form button:hover{
     margin-top: 4px;
     background-color: var(--secondary-color);
     color: var(--primary-color);
-    width: 20%;
+    width: fit-content;
     margin: 1px;
     border-color: var(--secondary-color);
 }
