@@ -87,9 +87,24 @@ form button:hover{
 
 .itemButton{
     padding: 10px;
+    margin-top: 4px;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    width: 20%;
+    margin: auto;
+    border-color: var(--secondary-color);
+}
+
+.itemButton:hover{
+    color: var(--tertiary-color);
+    border-color: var(--primary-color);
 }
 
 .itemButton.active{
-    padding: 20px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
 }
 
+.itemButton.active:hover{
+    color: var(--tertiary-color);
+}
