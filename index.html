@@ -94,8 +94,9 @@
                     success: function(response){
                         console.log(response.data);
                         for(let x = 0; x < response.data.length; x++){
+                            console.log(response.data[x]);
                             document.getElementById("itemBox").innerHTML += 
-                                `<button class="itemButton" id=${response.data[x]} onclick="selectButton(${response.data[x]})">${response.data[x]}</button>`   
+                                `<button class="itemButton" id=${response.data[x]} onclick="selectButton()">${response.data[x]}</button>`   
                         }
                     },
                     error: function(xhr, error, status){
@@ -105,14 +106,14 @@
                 });
             }
 
-            function selectButton(itemName){
-                if(document.getElementById(itemName.id).className != 'itemButton active'){
-                    document.getElementById(itemName.id).className = 'itemButton active';
+            function selectButton(){
+                console.log(event.currentTarget)
+                if(event.currentTarget.className != 'itemButton active'){
+                    event.currentTarget.className = 'itemButton active';
                 }
                 else{
-                    document.getElementById(itemName.id).className = 'itemButton';
+                    event.currentTarget.className = 'itemButton';
                 }
-                console.log(itemName.id)
             }
 
             itemSelectionButtons();

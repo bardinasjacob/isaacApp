@@ -104,6 +104,8 @@ form button:hover{
     border: 3px #020402;
     border-style: solid;
     padding: 3px;
+    max-height: 20rem;
+    overflow-y: scroll;
 }
 
 
