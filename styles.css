@@ -67,6 +67,18 @@ main{
     margin-right: 10%;
 }
 
+#character{
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+#character:hover{
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
 form{
     display: flex;
     flex-direction: column;
@@ -97,15 +109,10 @@ form button:hover{
 
 #itemPanel{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
     margin-left: 10%;
     margin-right: 10%;
-    border: 3px #020402;
-    border-style: solid;
-    padding: 3px;
-    max-height: 20rem;
-    overflow-y: scroll;
 }
 
 
@@ -115,6 +122,11 @@ form button:hover{
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: start;
+    border: 3px #020402;
+    border-style: solid;
+    padding: 3px;
+    max-height: 20rem;
+    overflow-y: scroll;
     
 }
 
