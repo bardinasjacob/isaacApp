@@ -35,7 +35,11 @@
                 <div id="itemPanel">
                     <div id="itemBox">
                     </div>
-                    <div id="selectedItems">asdasd</div>
+                    <div id="selectedItemsContainer">
+                        <p id="selectedItems">
+                            test
+                        </p>
+                    </div>
                 </div>
             </div>
             <button onclick="">Calculate</button>
@@ -110,10 +114,19 @@
                 console.log(event.currentTarget)
                 if(event.currentTarget.className != 'itemButton active'){
                     event.currentTarget.className = 'itemButton active';
+                    itemList.push(event.currentTarget.id)
                 }
                 else{
                     event.currentTarget.className = 'itemButton';
+                    if(itemList.length == 1){
+                        itemList = []
+                    }
+                    else{
+                        itemList[itemList.indexOf(event.currentTarget.id)] = itemList[0]
+                        itemList.shift()
+                    }
                 }
+                document.getElementById("selectedItems").innerHTML = `${itemList}`
             }
 
             itemSelectionButtons();

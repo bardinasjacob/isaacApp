@@ -121,13 +121,24 @@ form button:hover{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: start;
+    justify-content: space-between;
     border: 3px #020402;
     border-style: solid;
     padding: 3px;
     max-height: 20rem;
     overflow-y: scroll;
+    max-width: 30rem;
     
+}
+
+#selectedItemsContainer{
+    width: inherit;
+}
+
+#selectedItems{
+    max-inline-size: 30rem;
+    text-wrap: wrap;
+    overflow-wrap: break-word;
 }
 
 .itemButton{
