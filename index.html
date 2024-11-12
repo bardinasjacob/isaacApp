@@ -48,7 +48,7 @@
 
         </footer>
         <script>
-            let totalStats = [] * 9;
+            let totalStats = [0,0,0,0,0,0,0,0,0,0];
             let itemList = []
 
             //Populate char selection dropdown with data from items table
@@ -120,12 +120,23 @@
                     },
                     dataType: "json",
                     success: function(response){
-                        console.log(response);
+                        //Iterate through the stats of each object and add them to the total stats 
+                        for(let i = 0; i < response.data.length; i++){
+                            let k = 0;
+                            for (const j in response.data[i]){
+                                totalStats[k] = totalStats[k] + Number(response.data[i][j])
+                                console.log(response.data[i][j])
+                                k++
+                            }
+                        }
+                        console.log(totalStats)
+                        
                     },
                     error: function(xhr, error, status){
                         alert("Error");
                         console.error(error + " " + status)
                     }
+                    
                 });
             }
 

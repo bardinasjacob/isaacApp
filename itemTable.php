@@ -62,6 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             $item_query = "SELECT item_red_hp, item_soul_hp, item_speed, item_tears, item_tears_mult, item_dmg, item_dmg_mult, item_range, item_shot_speed, item_deal_rate
             FROM item_table WHERE item_name = '$item_name';";
             $result = mysqli_query($conn, $item_query);
+            //Add stats from each item into an array
             while ($row = mysqli_fetch_assoc($result)) {
                 $stats[] = $row;
             }
