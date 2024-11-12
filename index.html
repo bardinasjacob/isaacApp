@@ -42,13 +42,13 @@
                     </div>
                 </div>
             </div>
-            <button onclick="">Calculate</button>
+            <button onclick="placeholderNameForItemSelectionQuery()">Calculate</button>
         </main>
         <footer>
 
         </footer>
         <script>
-            let totalStats = []
+            let totalStats = [] * 9;
             let itemList = []
 
             //Populate char selection dropdown with data from items table
@@ -70,26 +70,6 @@
                 });
             }
 
-            //placeholder name, the method that's going to be called on final user request
-            //will send list of selected items, query for the stats for each of them and then add the total to the character stats 
-            function placeholderNameForItemSelectionQuery() {
-                $.ajax({
-                    url: 'charTable.php',
-                    type: "GET",
-                    data: {
-                        param: itemList
-                    },
-                    dataType: "json",
-                    success: function(response){
-                        console.log(response.data);
-                    },
-                    error: function(xhr, error, status){
-                        alert("Error");
-                        console.error(error + " " + status)
-                    }
-                });
-            }
-
             //Populate item selection div with data from items table
             function itemSelectionButtons(){
                 $.ajax({
@@ -100,7 +80,7 @@
                         for(let x = 0; x < response.data.length; x++){
                             console.log(response.data[x]);
                             document.getElementById("itemBox").innerHTML += 
-                                `<button class="itemButton" id=${response.data[x]} onclick="selectButton()">${response.data[x]}</button>`   
+                                `<button class="itemButton" id=${response.data[x].replace(/\s+/g, '_')} onclick="selectButton()">${response.data[x]}</button>`   
                         }
                     },
                     error: function(xhr, error, status){
@@ -114,7 +94,7 @@
                 console.log(event.currentTarget)
                 if(event.currentTarget.className != 'itemButton active'){
                     event.currentTarget.className = 'itemButton active';
-                    itemList.push(event.currentTarget.id)
+                    itemList.push(event.currentTarget.id.replace('_', ' '))
                 }
                 else{
                     event.currentTarget.className = 'itemButton';
@@ -127,6 +107,26 @@
                     }
                 }
                 document.getElementById("selectedItems").innerHTML = `${itemList}`
+            }
+
+            //placeholder name, the method that's going to be called on final user request
+            //will send list of selected items, query for the stats for each of them and then add the total to the character stats 
+            function placeholderNameForItemSelectionQuery() {
+                $.ajax({
+                    url: 'itemTable.php',
+                    type: "GET",
+                    data: {
+                        param: itemList
+                    },
+                    dataType: "json",
+                    success: function(response){
+                        console.log(response);
+                    },
+                    error: function(xhr, error, status){
+                        alert("Error");
+                        console.error(error + " " + status)
+                    }
+                });
             }
 
             itemSelectionButtons();

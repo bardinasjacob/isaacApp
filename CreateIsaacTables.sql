@@ -32,8 +32,22 @@ CREATE table item_table(
     item_deal_rate FLOAT
     );
 
-    SELECT * FROM item_table;
+DROP TABLE IF EXISTS run_table;
+CREATE table run_table(
+    run_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    character_id INT, 
+    run_inventory VARCHAR(255),
+    run_red_hp INT,
+    run_soul_hp INT,
+    run_speed FLOAT,
+    run_tears FLOAT,
+    run_tears_mult FLOAT,
+    run_dmg FLOAT,
+    run_dmg_mult FLOAT,
+    run_range FLOAT,
+    run_shot_speed FLOAT,
+    run_deal_rate FLOAT,
+    FOREIGN KEY (character_id) REFERENCES character_table(char_id)
+    );
 
-    INSERT INTO item_table(
-                    item_name, item_red_hp, item_soul_hp, item_speed, item_tears, item_tears_mult, item_dmg, item_dmg_mult, item_range, item_shot_speed, item_deal_rate)
-                    VALUES ('{$name}', 1, 1, 1, 1, 1, 1, 1, 1, 1, {$deal_rate});
+SELECT * FROM item_table

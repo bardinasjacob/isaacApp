@@ -56,9 +56,19 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     //If get method has parameters search for specific item information, otherwise just return all item names
     $param = $_GET['param'] ?? null;
     if ($param) {
+        $stats = [];
+        for( $i = 0; $i < count($param); $i++){
+            $item_name = $param[$i];
+            $item_query = "SELECT item_red_hp, item_soul_hp, item_speed, item_tears, item_tears_mult, item_dmg, item_dmg_mult, item_range, item_shot_speed, item_deal_rate
+            FROM item_table WHERE item_name = '$item_name';";
+            $result = mysqli_query($conn, $item_query);
+            while ($row = mysqli_fetch_assoc($result)) {
+                $stats[] = $row;
+            }
+        }
         $response = [
-            'status' => 'chilling',
-            'data' => 'params working fine lol'
+            'status' => 'success',
+            'data' => $stats
         ];
     } else {
         $item_query = "SELECT item_name FROM item_table;";
