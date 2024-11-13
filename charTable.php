@@ -23,7 +23,6 @@
             $characters = [];
             while($row = mysqli_fetch_assoc($result)){
                 $characters[] = $row['char_name'];
-
             };
             $response = [
                 'status' => 'success',
@@ -42,3 +41,4 @@
     echo json_encode($response);
 
     mysqli_close($conn);
+    ?>

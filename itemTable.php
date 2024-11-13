@@ -25,8 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $range = htmlspecialchars($_POST['range']);
     $deal_rate = htmlspecialchars($_POST['deal_rate']);
 
-
-
     //Checking to see if there's already an item in the table with the same name
     $dup_query = "SELECT COUNT(item_name) AS 'Total' FROM item_table WHERE item_name LIKE '$name%' GROUP BY item_name;";
 

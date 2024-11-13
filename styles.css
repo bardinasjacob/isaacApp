@@ -121,7 +121,7 @@ form button:hover{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     border: 3px #020402;
     border-style: solid;
     padding: 3px;

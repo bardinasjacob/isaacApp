@@ -76,9 +76,7 @@
                     url: 'itemTable.php',
                     type: "GET",
                     success: function(response){
-                        console.log(response.data);
                         for(let x = 0; x < response.data.length; x++){
-                            console.log(response.data[x]);
                             document.getElementById("itemBox").innerHTML += 
                                 `<button class="itemButton" id=${response.data[x].replace(/\s+/g, '_')} onclick="selectButton()">${response.data[x]}</button>`   
                         }
@@ -91,7 +89,6 @@
             }
 
             function selectButton(){
-                console.log(event.currentTarget)
                 if(event.currentTarget.className != 'itemButton active'){
                     event.currentTarget.className = 'itemButton active';
                     itemList.push(event.currentTarget.id.replace('_', ' '))
@@ -120,24 +117,34 @@
                     },
                     dataType: "json",
                     success: function(response){
-                        //Iterate through the stats of each object and add them to the total stats 
-                        for(let i = 0; i < response.data.length; i++){
+                        //Iterate through the stats of each object and add them to the total stats
+                        //Checking to make sure user has selected item to avoid conflict with item button query
+                        if(itemList.length != 0){
+                            for(let i = 0; i < response.data.length; i++){
                             let k = 0;
                             for (const j in response.data[i]){
+                                console.log(response.data[i])
                                 totalStats[k] = totalStats[k] + Number(response.data[i][j])
-                                console.log(response.data[i][j])
                                 k++
                             }
                         }
-                        console.log(totalStats)
+                        //Reset button selection and item lists upon user submission
+                            for(let i = 0; i < itemList.length; i++){
+                                document.getElementById(itemList[i].replace(' ', '_')).className = 'itemButton'
+                            }
+                            itemList = [];
+                            totalStats.fill(0)
+                            document.getElementById("selectedItems").innerHTML = `${itemList}`
+                            console.log(`${itemList}, ${totalStats}`)
+                        }
                         
                     },
                     error: function(xhr, error, status){
                         alert("Error");
                         console.error(error + " " + status)
-                    }
-                    
+                    } 
                 });
+
             }
 
             itemSelectionButtons();
