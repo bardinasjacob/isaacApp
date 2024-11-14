@@ -35,7 +35,7 @@ CREATE table item_table(
 DROP TABLE IF EXISTS run_table;
 CREATE table run_table(
     run_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    character_id INT, 
+    character_name VARCHAR(255), 
     run_inventory VARCHAR(255),
     run_red_hp INT,
     run_soul_hp INT,
@@ -46,8 +46,7 @@ CREATE table run_table(
     run_dmg_mult FLOAT,
     run_range FLOAT,
     run_shot_speed FLOAT,
-    run_deal_rate FLOAT,
-    FOREIGN KEY (character_id) REFERENCES character_table(char_id)
+    run_deal_rate FLOAT
     );
 
 SELECT * FROM item_table

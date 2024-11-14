@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-        <button onclick="placeholderNameForItemSelectionQuery()">Calculate</button>
+        <button onclick="ItemSelectionQuery()" id="calculate">Calculate</button>
         <div id="tableContainer">
             <table id="runsTable">
                 <thead>
@@ -71,9 +71,12 @@
 
     </footer>
     <script>
-        let totalStats = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        let primaryColor = "#C5EFCB"
+        let tertiaryColor = "#B42034";
+
+        let totalStats = [3, 0, 1, 1, 3, 1, 10, 5, 1, 1];
         let itemList = []
-        let runs = []
+        let currentChar = 'Isaac'
 
         //Populate char selection dropdown with data from items table
         function charDropdown() {
@@ -95,8 +98,9 @@
         }
 
         //TODO Add character stat functionality 
-        function characterChange(){
-            let currChar = event.currentTarget.value
+        //Make stat changes happen on character change(Add stats after change but have default isaac stats)
+        function characterChange() {
+            currentChar = event.currentTarget.value
         }
 
         //Populate item selection div with data from items table
@@ -137,7 +141,7 @@
 
         //placeholder name, the method that's going to be called on final user request
         //will send list of selected items, query for the stats for each of them and then add the total to the character stats 
-        function placeholderNameForItemSelectionQuery() {
+        function ItemSelectionQuery() {
             $.ajax({
                 url: 'itemTable.php',
                 type: "GET",
@@ -156,15 +160,9 @@
                                 k++
                             }
                         }
-                        //Reset button selection and item lists upon user submission
-                        for (let i = 0; i < itemList.length; i++) {
-                            document.getElementById(itemList[i].replace(' ', '_')).className = 'itemButton'
-                        }
-                        console.log(`Pre clear: ${itemList}, ${totalStats}`)
-                        itemList = [];
-                        totalStats.fill(0)
-                        document.getElementById("selectedItems").innerHTML = `${itemList}`
-                        console.log(`${itemList}, ${totalStats}`)
+                        console.log(totalStats)
+                        runsInsertQuery(totalStats);
+                        clearInventory();
                     }
 
                 },
@@ -176,20 +174,59 @@
 
         }
 
-        function runsTable(){
+        function runsInsertQuery(stats) {
+            let buttonRef = document.getElementById("calculate")
+            buttonRef.setAttribute("disabled", "disabled");
+            buttonRef.style.color = tertiaryColor
+
+            let runInfo = [currentChar, JSON.parse(JSON.stringify(itemList)), JSON.parse(JSON.stringify(stats))]
+            console.log(runInfo)
+
+            $.ajax({
+                url: 'runTable.php',
+                type: "POST",
+                data: {
+                    param: runInfo
+                },
+                success: function (response) {
+                    console.log(response);
+                    buttonRef.removeAttribute("disabled");
+                    buttonRef.style.color = primaryColor
+                    runsTable();
+                },
+                error: function (xhr, error, status) {
+                    alert("Error");
+                    console.error(error + " " + status)
+                    buttonRef.removeAttribute("disabled");
+                    buttonRef.style.color = primaryColor
+                }
+            });
+        }
+
+        function clearInventory() {
+            //Reset button selection and item lists upon user submission
+            for (let i = 0; i < itemList.length; i++) {
+                document.getElementById(itemList[i].replace(' ', '_')).className = 'itemButton'
+            }
+            console.log(`Pre clear: ${itemList}, ${totalStats}`)
+            itemList = [];
+            totalStats.fill(0)
+            document.getElementById("selectedItems").innerHTML = `${itemList}`
+            console.log(`${itemList}, ${totalStats}`)
+        }
+
+        function runsTable() {
             $.ajax({
                 url: 'runTable.php',
                 type: "GET",
                 success: function (response) {
-
                     for (let x = 0; x < response.data.length; x++) {
                         let row = document.createElement('tr');
-                        for(let i in response.data[x]){
-                           row.innerHTML += `<td>${response.data[x][i]}</td>` 
+                        for (let i in response.data[x]) {
+                            row.innerHTML += `<td>${response.data[x][i]}</td>`
                         }
                         document.getElementById('runsBody').appendChild(row)
                     }
-                    console.log(runs)
                 },
                 error: function (xhr, error, status) {
                     alert("Error");

@@ -12,31 +12,31 @@ if (!$conn) {
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
+    $param = $_POST['param'];
 
-    $name = htmlspecialchars($_POST['name']);
-    $redHp = htmlspecialchars($_POST['red_hp']);
-    $soulHp = htmlspecialchars($_POST['soul_hp']);
-    $speed = htmlspecialchars($_POST['speed']);
-    $tears = htmlspecialchars($_POST['tears']);
-    $tears_mult = htmlspecialchars($_POST['tears_mult']);
-    $dmg = htmlspecialchars($_POST['dmg']);
-    $dmg_mult = htmlspecialchars($_POST['dmg_mult']);
-    $shot_speed = htmlspecialchars($_POST['shot_speed']);
-    $range = htmlspecialchars($_POST['range']);
-    $deal_rate = htmlspecialchars($_POST['deal_rate']);
+    $char_name = $param[0];
+    $inventory = implode(", ", $param[1]);
+    $redHp = $param[2][0];
+    $soulHp = $param[2][1];
+    $speed = $param[2][2];
+    $tears = $param[2][3];
+    $tears_mult = $param[2][4];
+    $dmg = $param[2][5];
+    $dmg_mult = $param[2][7];
+    $shot_speed = $param[2][6];
+    $range = $param[2][8];
+    $deal_rate = $param[2][9];
 
-        $ins_query = "INSERT INTO item_table(
-            char_name, item_red_hp, item_soul_hp, item_speed, item_tears, item_tears_mult, item_dmg, item_dmg_mult, item_range, item_shot_speed, item_deal_rate)
-            VALUES ('$name', {$redHp}, $soulHp, $speed, $tears, $tears_mult, $dmg, $dmg_mult, $range, $shot_speed, $deal_rate);";
+    $ins_query = "INSERT INTO run_table (character_name, run_inventory, run_red_hp, run_soul_hp, run_speed, run_tears, run_tears_mult, run_dmg, run_dmg_mult, run_range, run_shot_speed, run_deal_rate) 
+            VALUES 
+            ('$char_name', '$inventory', $redHp, $soulHp, $speed, $tears, $tears_mult, $dmg, $dmg_mult, $range, $shot_speed, $deal_rate);";
 
 
-        if (mysqli_query($conn, $ins_query)) {
-            $response = ["status" => 'success', "message" => "Record inserted"];
-        } else {
-            $response = ["status" => 'error', "message" => "Error inserting record"];
-        }
-
-    
+    if (mysqli_query($conn, $ins_query)) {
+        $response = ["status" => 'success', "message" => "Record inserted"];
+    } else {
+        $response = ["status" => 'error', "message" => "Query Didn't Work"];
+    }
 
 } else if ($_SERVER['REQUEST_METHOD'] === "GET") {
     $run_query = "SELECT * FROM run_table;";
