@@ -1,31 +1,5 @@
 USE isaac;
 
-INSERT INTO character_table (char_name, char_red_hp, char_soul_hp, char_speed, char_tears, char_dmg, char_dmg_mult, char_range, char_shot_speed) 
-VALUES ("Isaac", 3, 3, 1, 1, 3, 1, 10, 5),
-("Maggie", 4, 0.6, 1, 3, 1, 10, 5, 1),
-("Cain", 2, 1, 1, 4, 1, 10, 5, 1),
-("Judas", 1, 1, 1, 7, 1, 10, 5, 1),
-("Samson", 2, 1, 1, 4, 1, 10, 5, 1),
-("Azazel", -3, 1, 1, 5, 1, 10, 5, 1),
-("Eve", 2, 1, 1, 4, 1.5, 10, 5, 1),
-("Bethany", 3, 1, 1, 3, 1, 10, 5, 1),
-("Lilith", 1, 0.8, 1, 4, 1, 10, 5, 1),
-("Lost", 1, 0.8, 1, 4, 1, 10, 5, 1),
-("Forgotton", 1, 0.8, 1, 4, 1, 10, 5, 1),
-("Keeper", 1, 0.8, 1, 4, 1, 10, 5, 1),
-("Blue Baby", 1, 0.8, 1, 4, 1, 10, 5, 1),
-("Jacob and Esau", 1, 0.8, 1, 4, 1, 10, 5, 1),
-("Tainted Isaac", 3, 1, 1, 3, 1, 10, 5, 1),
-("Tainted Maggie", 4, 0.6, 1, 3, 1, 10, 5, 1),
-("Tainted Cain", 2, 1, 1, 4, 1, 10, 5, 1),
-("Tainted Judas", 1, 1, 1, 7, 1, 10, 5, 1),
-("Tainted Samson", 2, 1, 1, 4, 1, 10, 5, 1),
-("Tainted Azazel", 1, 1, 1, 5, 1, 10, 5, 1),
-("Tainted Eve", 2, 1, 1, 4, 1.5, 10, 5, 1),
-("Tainted Bethany", 3, 1, 1, 3, 1, 10, 5, 1),
-("Tainted Lilith", 1, 0.8, 1, 4, 1, 10, 5, 1),
-("Tainted Lost", 1, 0.8, 1, 4, 1, 10, 5, 1),
-("Tainted Forgotton", 1, 0.8, 1, 4, 1, 10, 5, 1),
-("Tainted Keeper", 1, 0.8, 1, 4, 1, 10, 5, 1),
-("Tainted Blue Baby", 1, 0.8, 1, 4, 1, 10, 5, 1),
-("Tainted Jacob and Esau", 1, 0.8, 1, 4, 1, 10, 5, 1);
+INSERT INTO character_table (char_name, char_red_hp, char_soul_hp, char_speed, char_tears, char_tears_mult, char_dmg, char_dmg_mult, char_range, char_shot_speed) 
+VALUES ("Isaac", 3, 0, 1, 1, 3, 1, 1, 10, 5),
+("Maggie", 4, 0.6, 1, 3, 1, 1, 10, 5, 1);
