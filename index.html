@@ -1,155 +1,208 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>DBProject</title>
-        <meta name="description" content="Database Project">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="styles.css">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    </head>
-    <body>
-        <header>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="submit.html">Submit</a></li>
-                </ul>
-            </nav>
-            <h1>Isaac Stat Calculator</h1>
-            <p>This is a site that allows users to calculate stats of runs for the video game The Binding of Isaac </p>
-        </header>
-        <main  style="flex-direction: column;">
-            <div class="hero">
-                <div id="characterPanel">
-                    <picture id="charPicture"></picture>
-                    <div id="charSelect">
-                        <form id="charSelectForm">
-                            <select name="character" id="character">
-                                <option value="Isaac">Isaac</option>
-                            </select>
-                        </form>
-                    </div>
-                </div>
-                <div id="itemPanel">
-                    <div id="itemBox">
-                    </div>
-                    <div id="selectedItemsContainer">
-                        <p id="selectedItems">
-                            test
-                        </p>
-                    </div>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>DBProject</title>
+    <meta name="description" content="Database Project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="submit.html">Submit</a></li>
+            </ul>
+        </nav>
+        <h1>Isaac Stat Calculator</h1>
+        <p>This is a site that allows users to calculate stats of runs for the video game The Binding of Isaac </p>
+    </header>
+    <main style="flex-direction: column;">
+        <div class="hero">
+            <div id="characterPanel">
+                <picture id="charPicture"></picture>
+                <div id="charSelect">
+                    <form id="charSelectForm">
+                        <select name="character" id="character" onchange="characterChange(this)">
+                            <option value="Isaac">Isaac</option>
+                        </select>
+                    </form>
                 </div>
             </div>
-            <button onclick="placeholderNameForItemSelectionQuery()">Calculate</button>
-        </main>
-        <footer>
+            <div id="itemPanel">
+                <div id="itemBox">
+                </div>
+                <div id="selectedItemsContainer">
+                    <p id="selectedItems">
+                        test
+                    </p>
+                </div>
+            </div>
+        </div>
+        <button onclick="placeholderNameForItemSelectionQuery()">Calculate</button>
+        <div id="tableContainer">
+            <table id="runsTable">
+                <thead>
+                    <tr>Character</tr>
+                    <tr>Inventory</tr>
+                    <tr>Red Health</tr>
+                    <tr>Blue Health</tr>
+                    <tr>Speed</tr>
+                    <tr>Tears</tr>
+                    <tr>Tears Mult</tr>
+                    <tr>Damage</tr>
+                    <tr>Damage Mult</tr>
+                    <tr>Range</tr>
+                    <tr>Shot Speed</tr>
+                    <tr>Deal Rate</tr>
+                </thead>
+                <tbody id="runsBody">
 
-        </footer>
-        <script>
-            let totalStats = [0,0,0,0,0,0,0,0,0,0];
-            let itemList = []
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <footer>
 
-            //Populate char selection dropdown with data from items table
-            function charDropdownFunction() {
-                $.ajax({
-                    url: 'charTable.php',
-                    type: "GET",
-                    success: function(response){
-                        console.log(response.data);
-                        for(let x = 1; x < response.data.length; x++){
-                            document.getElementById("character").innerHTML += 
-                                `<option value = ${response.data[x]}>${response.data[x]}</option>`   
-                        }
-                    },
-                    error: function(xhr, error, status){
-                        alert("Error");
-                        console.error(error + " " + status)
+    </footer>
+    <script>
+        let totalStats = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        let itemList = []
+        let runs = []
+
+        //Populate char selection dropdown with data from items table
+        function charDropdown() {
+            $.ajax({
+                url: 'charTable.php',
+                type: "GET",
+                success: function (response) {
+                    console.log(response.data);
+                    for (let x = 1; x < response.data.length; x++) {
+                        document.getElementById("character").innerHTML +=
+                            `<option value = ${response.data[x]}>${response.data[x]}</option>`
                     }
-                });
-            }
-
-            //Populate item selection div with data from items table
-            function itemSelectionButtons(){
-                $.ajax({
-                    url: 'itemTable.php',
-                    type: "GET",
-                    success: function(response){
-                        for(let x = 0; x < response.data.length; x++){
-                            document.getElementById("itemBox").innerHTML += 
-                                `<button class="itemButton" id=${response.data[x].replace(/\s+/g, '_')} onclick="selectButton()">${response.data[x]}</button>`   
-                        }
-                    },
-                    error: function(xhr, error, status){
-                        alert("Error");
-                        console.error(error + " " + status)
-                    }
-                });
-            }
-
-            function selectButton(){
-                if(event.currentTarget.className != 'itemButton active'){
-                    event.currentTarget.className = 'itemButton active';
-                    itemList.push(event.currentTarget.id.replace('_', ' '))
+                },
+                error: function (xhr, error, status) {
+                    alert("Error");
+                    console.error(error + " " + status)
                 }
-                else{
-                    event.currentTarget.className = 'itemButton';
-                    if(itemList.length == 1){
-                        itemList = []
-                    }
-                    else{
-                        itemList[itemList.indexOf(event.currentTarget.id)] = itemList[0]
-                        itemList.shift()
-                    }
-                }
-                document.getElementById("selectedItems").innerHTML = `${itemList}`
-            }
+            });
+        }
 
-            //placeholder name, the method that's going to be called on final user request
-            //will send list of selected items, query for the stats for each of them and then add the total to the character stats 
-            function placeholderNameForItemSelectionQuery() {
-                $.ajax({
-                    url: 'itemTable.php',
-                    type: "GET",
-                    data: {
-                        param: itemList
-                    },
-                    dataType: "json",
-                    success: function(response){
-                        //Iterate through the stats of each object and add them to the total stats
-                        //Checking to make sure user has selected item to avoid conflict with item button query
-                        if(itemList.length != 0){
-                            for(let i = 0; i < response.data.length; i++){
+        //TODO Add character stat functionality 
+        function characterChange(){
+            let currChar = event.currentTarget.value
+        }
+
+        //Populate item selection div with data from items table
+        function itemSelectionButtons() {
+            $.ajax({
+                url: 'itemTable.php',
+                type: "GET",
+                success: function (response) {
+                    for (let x = 0; x < response.data.length; x++) {
+                        document.getElementById("itemBox").innerHTML +=
+                            `<button class="itemButton" id=${response.data[x].replace(/\s+/g, '_')} onclick="selectButton()">${response.data[x]}</button>`
+                    }
+                },
+                error: function (xhr, error, status) {
+                    alert("Error");
+                    console.error(error + " " + status)
+                }
+            });
+        }
+
+        function selectButton() {
+            if (event.currentTarget.className != 'itemButton active') {
+                event.currentTarget.className = 'itemButton active';
+                itemList.push(event.currentTarget.id.replace('_', ' '))
+            }
+            else {
+                event.currentTarget.className = 'itemButton';
+                if (itemList.length == 1) {
+                    itemList = []
+                }
+                else {
+                    itemList[itemList.indexOf(event.currentTarget.id)] = itemList[0]
+                    itemList.shift()
+                }
+            }
+            document.getElementById("selectedItems").innerHTML = `${itemList}`
+        }
+
+        //placeholder name, the method that's going to be called on final user request
+        //will send list of selected items, query for the stats for each of them and then add the total to the character stats 
+        function placeholderNameForItemSelectionQuery() {
+            $.ajax({
+                url: 'itemTable.php',
+                type: "GET",
+                data: {
+                    param: itemList
+                },
+                dataType: "json",
+                success: function (response) {
+                    //Iterate through the stats of each object and add them to the total stats
+                    //Checking to make sure user has selected item to avoid conflict with item button query
+                    if (itemList.length != 0) {
+                        for (let i = 0; i < response.data.length; i++) {
                             let k = 0;
-                            for (const j in response.data[i]){
-                                console.log(response.data[i])
+                            for (const j in response.data[i]) {
                                 totalStats[k] = totalStats[k] + Number(response.data[i][j])
                                 k++
                             }
                         }
                         //Reset button selection and item lists upon user submission
-                            for(let i = 0; i < itemList.length; i++){
-                                document.getElementById(itemList[i].replace(' ', '_')).className = 'itemButton'
-                            }
-                            itemList = [];
-                            totalStats.fill(0)
-                            document.getElementById("selectedItems").innerHTML = `${itemList}`
-                            console.log(`${itemList}, ${totalStats}`)
+                        for (let i = 0; i < itemList.length; i++) {
+                            document.getElementById(itemList[i].replace(' ', '_')).className = 'itemButton'
                         }
-                        
-                    },
-                    error: function(xhr, error, status){
-                        alert("Error");
-                        console.error(error + " " + status)
-                    } 
-                });
+                        console.log(`Pre clear: ${itemList}, ${totalStats}`)
+                        itemList = [];
+                        totalStats.fill(0)
+                        document.getElementById("selectedItems").innerHTML = `${itemList}`
+                        console.log(`${itemList}, ${totalStats}`)
+                    }
 
-            }
+                },
+                error: function (xhr, error, status) {
+                    alert("Error");
+                    console.error(error + " " + status)
+                }
+            });
 
-            itemSelectionButtons();
-            charDropdownFunction();
+        }
 
-        </script>
-    </body>
+        function runsTable(){
+            $.ajax({
+                url: 'runTable.php',
+                type: "GET",
+                success: function (response) {
+
+                    for (let x = 0; x < response.data.length; x++) {
+                        let row = document.createElement('tr');
+                        for(let i in response.data[x]){
+                           row.innerHTML += `<td>${response.data[x][i]}</td>` 
+                        }
+                        document.getElementById('runsBody').appendChild(row)
+                    }
+                    console.log(runs)
+                },
+                error: function (xhr, error, status) {
+                    alert("Error");
+                    console.error(error + " " + status)
+                }
+            });
+        }
+
+        runsTable();
+        itemSelectionButtons();
+        charDropdown();
+
+    </script>
+</body>
+
 </html>
