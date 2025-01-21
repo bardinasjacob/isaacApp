@@ -45,16 +45,38 @@ header{
     flex-direction: column;
     flex-wrap: wrap;
     color: var(--secondary-color);
-}
-
-header h1{
-    text-align: center;
     font-family: "Roboto", sans-serif;
+    text-align: center;
 }
 
 main{
     display: flex;
     justify-content: center;
+}
+
+.hero{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#characterPanel{
+    display: flex;
+    flex-direction: row;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+#character{
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+#character:hover{
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
 }
 
 form{
@@ -83,3 +105,84 @@ form button{
 form button:hover{
     color: var(--tertiary-color);
 }
+
+
+#itemPanel{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+
+#itemBox{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: 3px #020402;
+    border-style: solid;
+    padding: 3px;
+    max-height: 20rem;
+    overflow-y: scroll;
+    max-width: 30rem;
+    
+}
+
+#selectedItemsContainer{
+    width: inherit;
+}
+
+#selectedItems{
+    max-inline-size: 28rem;
+    text-wrap: wrap;
+    overflow-wrap: break-word;
+    color: var(--secondary-color);
+    font-family: "Roboto", sans-serif;
+    text-align: center;
+}
+
+.itemButton{
+    padding: 10px;
+    margin-top: 4px;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    width: fit-content;
+    margin: 1px;
+    border-color: var(--secondary-color);
+}
+
+.itemButton:hover{
+    color: var(--tertiary-color);
+    border-color: var(--primary-color);
+}
+
+.itemButton.active{
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.itemButton.active:hover{
+    color: var(--tertiary-color);
+}
+
+#calculate{
+    justify-self: center;
+    padding: 10px;
+    margin-top: 4px;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    width: fit-content;
+    margin: auto;
+    border-color: var(--secondary-color);
+}
+
+#tableContainer{
+    margin: auto;
+    color: var(--secondary-color);
+    font-family: "Roboto", sans-serif;
+    font-size: medium;
+}
+

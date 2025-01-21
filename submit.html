@@ -23,12 +23,16 @@
             <form id="itemEntry">
                 <label>Item Name</label>
                 <input type="text" id="itemName" placeholder="Enter the item name">
-                <label>Net HP</label>
-                <input type="text" id="netHP" value="0">
+                <label>Net Red HP</label>
+                <input type="text" id="netRedHP" value="0">
+                <label>Net Soul HP</label>
+                <input type="text" id="netSoulHP" value="0">
                 <label>Net Speed</label>
                 <input type="text" id="netSpeed" value="0">
                 <label>Net Tear Rate</label>
                 <input type="text" id="netTearsRate" value="0">
+                <label>Net Tear Mult</label>
+                <input type="text" id="netTearsMult" value="0">
                 <label>Net Damage</label>
                 <input type="text" id="netDamage" value="0">
                 <label>Net Damage Multiplier</label>
@@ -39,50 +43,66 @@
                 <input type="text" id="netShotSpeed" value="0">
                 <label>Net Deal % Change</label>
                 <input type="text" id="netDealRate" value="0">
-                <button type="submit">Submit</button>
+                <button type="submit" id="submitButton" >Submit</button>
             </form>
         </main>
         <footer>
 
         </footer>
         <script async defer>
+
+            let primaryColor = "#C5EFCB"
+            let tertiaryColor = "#B42034";
+
             document.getElementById("itemEntry").addEventListener("submit", function(e) {
                 e.preventDefault();
+
+                document.getElementById("submitButton").setAttribute("disabled", "disabled");
+                document.getElementById("submitButton").style.color = tertiaryColor
                 
                 var name = $('#itemName').val();
-                var hp = $('#netHP').val();
+                var redHp = $('#netRedHP').val();
+                var soulHp = $('#netSoulHP').val();
                 var speed = $('#netSpeed').val();
                 var tears = $('#netTearsRate').val();
+                var tears_mult = $('#netTearsMult').val();
                 var dmg = $('#netDamage').val();
                 var dmg_mult = $('#netDamageMult').val();
+                var range = $('#netRange').val();
                 var shot_speed = $('#netShotSpeed').val();
                 var deal_rate = $('#netDealRate').val();
 
                 var formData = {
-                    name: name,
-                    hp: hp,
-                    speed: speed,
-                    tears: tears,
-                    dmg: dmg,
-                    dmg_mult: dmg_mult,
-                    shot_speed: shot_speed,
-                    deal_rate: deal_rate
+                    "name": name,
+                    "red_hp": redHp,
+                    "soul_hp": soulHp,
+                    "speed": speed,
+                    "tears": tears,
+                    "tears_mult": tears_mult,
+                    "dmg": dmg,
+                    "dmg_mult": dmg_mult,
+                    "range": range,
+                    "shot_speed": shot_speed,
+                    "deal_rate": deal_rate
                 }
 
-                console.log(formData)
-
                 $.ajax({
-                    url: 'process.php',
+                    url: 'itemTable.php',
                     type: "POST",
                     data: formData,
                     success: function(response){
-                        console.log(response)
-                        console.log
+                        alert(response.message);
+                        document.getElementById("submitButton").removeAttribute("disabled");
+                        document.getElementById("submitButton").style.color = primaryColor
                     },
                     error: function(xhr, error, status){
+                        alert("Error");
                         console.error(error + " " + status)
+                        document.getElementById("submitButton").removeAttribute("disabled");
+                        document.getElementById("submitButton").style.color = primaryColor
                     }
                 });
+                
             });
         </script>
     </body>
